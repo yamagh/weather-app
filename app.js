@@ -1,14 +1,25 @@
 const apiUrl = 'https://api.open-meteo.com/v1/forecast';
 
+function buildApiUrl(lat, lon) {
+    return `${apiUrl}?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=auto`;
+}
+
+function handleApiResponse(response) {
+    return response.json().then(data => {
+        displayCurrentWeather(data.current_weather);
+        displayForecast(data.daily);
+    });
+}
+
+function handleApiError(error) {
+    console.error('Error fetching weather data:', error);
+}
+
 function fetchWeatherData(lat, lon) {
-    const url = `${apiUrl}?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=auto`;
+    const url = buildApiUrl(lat, lon);
     return fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            displayCurrentWeather(data.current_weather);
-            displayForecast(data.daily);
-        })
-        .catch(error => console.error('Error fetching weather data:', error));
+        .then(handleApiResponse)
+        .catch(handleApiError);
 }
 
 function displayCurrentWeather(current) {
@@ -16,7 +27,7 @@ function displayCurrentWeather(current) {
     document.getElementById('humidity').textContent = 'N/A'; // Open-Meteo API does not provide humidity in current weather
     document.getElementById('wind-speed').textContent = `${current.windspeed} m/s`;
     document.getElementById('precipitation').textContent = 'N/A'; // Open-Meteo API does not provide precipitation in current weather
-    changeBackgroundColor(current.temperature, current.windspeed); // P8eca
+    changeBackgroundColor(current.temperature, current.windspeed);
 }
 
 function displayForecast(daily) {
@@ -36,7 +47,7 @@ function displayForecast(daily) {
     });
 }
 
-function changeBackgroundColor(temperature, windspeed) { // P79fc
+function changeBackgroundColor(temperature, windspeed) {
     const body = document.body;
     body.classList.remove('cold', 'warm', 'hot', 'windy', 'calm', 'day', 'night');
 
