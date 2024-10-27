@@ -1,7 +1,7 @@
 const apiUrl = 'https://api.open-meteo.com/v1/forecast';
 
 function fetchWeatherData(lat, lon) {
-    const url = `${apiUrl}?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_mean&current_weather=true&timezone=auto`;
+    const url = `${apiUrl}?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=auto`;
     return fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -16,6 +16,7 @@ function displayCurrentWeather(current) {
     document.getElementById('humidity').textContent = 'N/A'; // Open-Meteo API does not provide humidity in current weather
     document.getElementById('wind-speed').textContent = `${current.windspeed} m/s`;
     document.getElementById('precipitation').textContent = 'N/A'; // Open-Meteo API does not provide precipitation in current weather
+    changeBackgroundColor(current.temperature, current.windspeed); // P8eca
 }
 
 function displayForecast(daily) {
@@ -26,14 +27,32 @@ function displayForecast(daily) {
         const forecastElement = document.createElement('div');
         forecastElement.innerHTML = `
             <div>
-                <p>${new Date(day).toLocaleDateString(undefined, { weekday: 'long' })}</p>
+                <p>${new Date(day).toLocaleDateString(undefined, { weekday: 'short' })}</p>
                 <p>${daily.temperature_2m_max[index]} °C / ${daily.temperature_2m_min[index]} °C</p>
                 <p>${daily.precipitation_sum[index]} mm</p>
-                <p>${daily.precipitation_probability_mean[index]} %</p>
             </div>
         `;
         forecastContainer.appendChild(forecastElement);
     });
+}
+
+function changeBackgroundColor(temperature, windspeed) { // P79fc
+    const body = document.body;
+    body.classList.remove('cold', 'warm', 'hot', 'windy', 'calm');
+
+    if (temperature < 10) {
+        body.classList.add('cold');
+    } else if (temperature >= 10 && temperature < 20) {
+        body.classList.add('warm');
+    } else {
+        body.classList.add('hot');
+    }
+
+    if (windspeed > 10) {
+        body.classList.add('windy');
+    } else {
+        body.classList.add('calm');
+    }
 }
 
 function getLocation() {

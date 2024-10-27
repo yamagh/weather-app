@@ -31,11 +31,22 @@ body {
     margin-bottom: 10px;
 }
 
-#forecast .day-of-week {
-    font-weight: bold;
-    color: #333;
+.cold {
+    background-color: #a0c4ff;
 }
 
-#forecast .precipitation-probability {
-    color: #007BFF;
+.warm {
+    background-color: #ffd6a5;
+}
+
+.hot {
+    background-color: #ffadad;
+}
+
+.windy {
+    background-color: #caffbf;
+}
+
+.calm {
+    background-color: #fdffb6;
 }
