@@ -1,101 +1,109 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
 }
 
 #weather-container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 #weather-info p {
-    margin: 10px 0;
+  margin: 10px 0;
+}
+
+#current-weather-container {
+  width: 100vw;
+  text-align: center;
+}
+
+#weather-emoji {
+  font-size: 128px;
 }
 
 #forecast {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 #forecast div.row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 32px;
-    background-color: #e0e0e0;
-    border-radius: 4px;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 32px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 10px;
 }
 
 .bg-cold {
-    background-color: #a0c4ff;
+  background-color: #a0c4ff;
 }
 
 .bg-warm {
-    background-color: #ffd6a5;
+  background-color: #ffd6a5;
 }
 
 .bg-hot {
-    background-color: #ffadad;
+  background-color: #ffadad;
 }
 
 .bg-windy {
-    background-color: #caffbf;
+  background-color: #caffbf;
 }
 
 .bg-calm {
-    background-color: #fdffb6;
+  background-color: #fdffb6;
 }
 
 .bg-day {
-    background-color: #fffacd;
+  background-color: #fffacd;
 }
 
 .bg-night {
-    background-color: #2c3e50;
+  background-color: #2c3e50;
 }
 
 .bg-cold.bg-day {
-    background-color: #b0e0e6;
+  background-color: #b0e0e6;
 }
 
 .bg-cold.bg-night {
-    background-color: #4682b4;
+  background-color: #4682b4;
 }
 
 .bg-warm.bg-day {
-    background-color: #ffebcd;
+  background-color: #ffebcd;
 }
 
 .bg-warm.bg-night {
-    background-color: #cd853f;
+  background-color: #cd853f;
 }
 
 .bg-hot.bg-day {
-    background-color: #ffdead;
+  background-color: #ffdead;
 }
 
 .bg-hot.bg-night {
-    background-color: #8b0000;
+  background-color: #8b0000;
 }
 
 .bg-windy.bg-day {
-    background-color: #e0ffff;
+  background-color: #e0ffff;
 }
 
 .bg-windy.bg-night {
-    background-color: #5f9ea0;
+  background-color: #5f9ea0;
 }
 
 .bg-calm.bg-day {
-    background-color: #fafad2;
+  background-color: #fafad2;
 }
 
 .bg-calm.bg-night {
-    background-color: #556b2f;
+  background-color: #556b2f;
 }
-
