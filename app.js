@@ -1,13 +1,14 @@
 const apiUrl = 'https://api.open-meteo.com/v1/forecast';
 
 function buildApiUrl(lat, lon) {
-    return `${apiUrl}?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=auto`;
+    return `${apiUrl}?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&current_weather=true&timezone=auto&hourly=temperature_2m,precipitation,weathercode`;
 }
 
 function handleApiResponse(response) {
     return response.json().then(data => {
         displayCurrentWeather(data.current_weather);
         displayForecast(data.daily);
+        console.log(data.daily);
     });
 }
 
