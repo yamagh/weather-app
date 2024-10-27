@@ -22,10 +22,10 @@ body {
     margin-top: 20px;
 }
 
-#forecast div {
+#forecast div.row {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 10px 32px;
     background-color: #e0e0e0;
     border-radius: 4px;
     margin-bottom: 10px;
@@ -98,3 +98,4 @@ body {
 .bg-calm.bg-night {
     background-color: #556b2f;
 }
+

@@ -37,10 +37,11 @@ function displayForecast(daily) {
     daily.time.slice(1, 8).forEach((day, index) => {
         const forecastElement = document.createElement('div');
         forecastElement.innerHTML = `
-            <div>
-                <p>${new Date(day).toLocaleDateString(undefined, { weekday: 'short' })}</p>
-                <p>${daily.temperature_2m_max[index]} °C / ${daily.temperature_2m_min[index]} °C</p>
-                <p>${daily.precipitation_sum[index]} mm</p>
+            <div class="row">
+                <span>${new Date(day).toLocaleDateString(undefined, { weekday: 'short' })}</span>
+                <span>${daily.precipitation_sum[index]} mm</span>
+                <span>${daily.temperature_2m_min[index]} °C</span>
+                <span>${daily.temperature_2m_max[index]} °C</span>
             </div>
         `;
         forecastContainer.appendChild(forecastElement);
