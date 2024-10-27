@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
@@ -28,4 +29,13 @@ body {
     background-color: #e0e0e0;
     border-radius: 4px;
     margin-bottom: 10px;
+}
+
+#forecast .day-of-week {
+    font-weight: bold;
+    color: #333;
+}
+
+#forecast .precipitation-probability {
+    color: #007BFF;
 }

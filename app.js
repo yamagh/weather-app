@@ -1,7 +1,7 @@
 const apiUrl = 'https://api.open-meteo.com/v1/forecast';
 
 function fetchWeatherData(lat, lon) {
-    const url = `${apiUrl}?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=auto`;
+    const url = `${apiUrl}?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_mean&current_weather=true&timezone=auto`;
     return fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -16,15 +16,6 @@ function displayCurrentWeather(current) {
     document.getElementById('humidity').textContent = 'N/A'; // Open-Meteo API does not provide humidity in current weather
     document.getElementById('wind-speed').textContent = `${current.windspeed} m/s`;
     document.getElementById('precipitation').textContent = 'N/A'; // Open-Meteo API does not provide precipitation in current weather
-
-    // Change background color based on temperature
-    if (current.temperature < 0) {
-        document.body.style.backgroundColor = 'blue';
-    } else if (current.temperature >= 0 && current.temperature <= 20) {
-        document.body.style.backgroundColor = 'lightblue';
-    } else {
-        document.body.style.backgroundColor = 'yellow';
-    }
 }
 
 function displayForecast(daily) {
@@ -35,9 +26,10 @@ function displayForecast(daily) {
         const forecastElement = document.createElement('div');
         forecastElement.innerHTML = `
             <div>
-                <p>Day: ${new Date(day * 1000).toLocaleDateString()}</p>
-                <p>Temperature: ${daily.temperature_2m_max[index]} °C / ${daily.temperature_2m_min[index]} °C</p>
-                <p>Precipitation: ${daily.precipitation_sum[index]} mm</p>
+                <p>${new Date(day).toLocaleDateString(undefined, { weekday: 'long' })}</p>
+                <p>${daily.temperature_2m_max[index]} °C / ${daily.temperature_2m_min[index]} °C</p>
+                <p>${daily.precipitation_sum[index]} mm</p>
+                <p>${daily.precipitation_probability_mean[index]} %</p>
             </div>
         `;
         forecastContainer.appendChild(forecastElement);
