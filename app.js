@@ -1,37 +1,34 @@
-const apiKey = 'YOUR_API_KEY';
-const apiUrl = 'https://api.openweathermap.org/data/2.5/onecall';
+const apiUrl = 'https://api.open-meteo.com/v1/forecast';
 
 function fetchWeatherData(lat, lon) {
-    const url = `${apiUrl}?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=metric&appid=${apiKey}`;
+    const url = `${apiUrl}?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=auto`;
     return fetch(url)
         .then(response => response.json())
         .then(data => {
-            displayCurrentWeather(data.current);
+            displayCurrentWeather(data.current_weather);
             displayForecast(data.daily);
         })
         .catch(error => console.error('Error fetching weather data:', error));
 }
 
 function displayCurrentWeather(current) {
-    document.getElementById('temperature').textContent = `${current.temp} °C`;
-    document.getElementById('humidity').textContent = `${current.humidity} %`;
-    document.getElementById('wind-speed').textContent = `${current.wind_speed} m/s`;
-    document.getElementById('precipitation').textContent = `${current.weather[0].description}`;
+    document.getElementById('temperature').textContent = `${current.temperature} °C`;
+    document.getElementById('humidity').textContent = 'N/A'; // Open-Meteo API does not provide humidity in current weather
+    document.getElementById('wind-speed').textContent = `${current.windspeed} m/s`;
+    document.getElementById('precipitation').textContent = 'N/A'; // Open-Meteo API does not provide precipitation in current weather
 }
 
 function displayForecast(daily) {
     const forecastContainer = document.getElementById('forecast');
     forecastContainer.innerHTML = '';
 
-    daily.slice(1, 8).forEach(day => {
+    daily.time.slice(1, 8).forEach((day, index) => {
         const forecastElement = document.createElement('div');
         forecastElement.innerHTML = `
             <div>
-                <p>Day: ${new Date(day.dt * 1000).toLocaleDateString()}</p>
-                <p>Temperature: ${day.temp.day} °C</p>
-                <p>Humidity: ${day.humidity} %</p>
-                <p>Wind Speed: ${day.wind_speed} m/s</p>
-                <p>Precipitation: ${day.weather[0].description}</p>
+                <p>Day: ${new Date(day * 1000).toLocaleDateString()}</p>
+                <p>Temperature: ${daily.temperature_2m_max[index]} °C / ${daily.temperature_2m_min[index]} °C</p>
+                <p>Precipitation: ${daily.precipitation_sum[index]} mm</p>
             </div>
         `;
         forecastContainer.appendChild(forecastElement);

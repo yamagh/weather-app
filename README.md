@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a web application that displays current weather conditions for a user's location. It includes weather details such as temperature, humidity, wind speed, and precipitation. The app also shows a 7-day weather forecast using real-time data fetched from a weather API.
+This is a web application that displays current weather conditions for a user's location. It includes weather details such as temperature, humidity, wind speed, and precipitation. The app also shows a 7-day weather forecast using real-time data fetched from a free weather API.
 
 ## Setup
 
