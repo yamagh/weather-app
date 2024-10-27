@@ -23,11 +23,10 @@ function fetchWeatherData(lat, lon) {
 }
 
 function displayCurrentWeather(current) {
-    document.getElementById('temperature').textContent = `${current.temperature} °C`;
-    document.getElementById('humidity').textContent = 'N/A'; // Open-Meteo API does not provide humidity in current weather
+    const roundedTemperature = Math.round(current.temperature);
+    document.getElementById('temperature').textContent = `${roundedTemperature} °C`;
     document.getElementById('wind-speed').textContent = `${current.windspeed} m/s`;
-    document.getElementById('precipitation').textContent = 'N/A'; // Open-Meteo API does not provide precipitation in current weather
-    changeBackgroundColor(current.temperature, current.windspeed);
+    changeBackgroundColor(roundedTemperature, current.windspeed);
 }
 
 function displayForecast(daily) {
@@ -36,12 +35,15 @@ function displayForecast(daily) {
 
     daily.time.slice(1, 8).forEach((day, index) => {
         const forecastElement = document.createElement('div');
+        const roundedPrecipitation = Math.round(daily.precipitation_sum[index]);
+        const roundedMinTemperature = Math.round(daily.temperature_2m_min[index]);
+        const roundedMaxTemperature = Math.round(daily.temperature_2m_max[index]);
         forecastElement.innerHTML = `
             <div class="row">
                 <span>${new Date(day).toLocaleDateString(undefined, { weekday: 'short' })}</span>
-                <span>${daily.precipitation_sum[index]} mm</span>
-                <span>${daily.temperature_2m_min[index]} °C</span>
-                <span>${daily.temperature_2m_max[index]} °C</span>
+                <span>${roundedPrecipitation} mm</span>
+                <span>${roundedMinTemperature} °C</span>
+                <span>${roundedMaxTemperature} °C</span>
             </div>
         `;
         forecastContainer.appendChild(forecastElement);
