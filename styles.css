@@ -50,3 +50,51 @@ body {
 .calm {
     background-color: #fdffb6;
 }
+
+.day {
+    background-color: #fffacd;
+}
+
+.night {
+    background-color: #2c3e50;
+}
+
+.cold.day {
+    background-color: #b0e0e6;
+}
+
+.cold.night {
+    background-color: #4682b4;
+}
+
+.warm.day {
+    background-color: #ffebcd;
+}
+
+.warm.night {
+    background-color: #cd853f;
+}
+
+.hot.day {
+    background-color: #ffdead;
+}
+
+.hot.night {
+    background-color: #8b0000;
+}
+
+.windy.day {
+    background-color: #e0ffff;
+}
+
+.windy.night {
+    background-color: #5f9ea0;
+}
+
+.calm.day {
+    background-color: #fafad2;
+}
+
+.calm.night {
+    background-color: #556b2f;
+}

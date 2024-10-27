@@ -38,7 +38,17 @@ function displayForecast(daily) {
 
 function changeBackgroundColor(temperature, windspeed) { // P79fc
     const body = document.body;
-    body.classList.remove('cold', 'warm', 'hot', 'windy', 'calm');
+    body.classList.remove('cold', 'warm', 'hot', 'windy', 'calm', 'day', 'night');
+
+    const currentTime = new Date();
+    const hours = currentTime.getHours();
+    const isDayTime = hours >= 6 && hours < 18;
+
+    if (isDayTime) {
+        body.classList.add('day');
+    } else {
+        body.classList.add('night');
+    }
 
     if (temperature < 10) {
         body.classList.add('cold');
