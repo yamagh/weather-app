@@ -16,6 +16,15 @@ function displayCurrentWeather(current) {
     document.getElementById('humidity').textContent = 'N/A'; // Open-Meteo API does not provide humidity in current weather
     document.getElementById('wind-speed').textContent = `${current.windspeed} m/s`;
     document.getElementById('precipitation').textContent = 'N/A'; // Open-Meteo API does not provide precipitation in current weather
+
+    // Change background color based on temperature
+    if (current.temperature < 0) {
+        document.body.style.backgroundColor = 'blue';
+    } else if (current.temperature >= 0 && current.temperature <= 20) {
+        document.body.style.backgroundColor = 'lightblue';
+    } else {
+        document.body.style.backgroundColor = 'yellow';
+    }
 }
 
 function displayForecast(daily) {
